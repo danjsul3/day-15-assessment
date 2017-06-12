@@ -31,6 +31,7 @@ the variables are strings.
 console.log(y), where it is right now would be undefined.
 console.log(x) is "I'm a local variable"
 
+Both are inside the iffe so they are both local, therefore y is not a global variable.
 y is undefined because it is not yet defined.
 x is "I'm a local variable" because we defined it as such.
 **************************************************************************************/
@@ -186,11 +187,11 @@ Hoisting
 (function(){
   "use strict";
 
-  pizza.pizzaMkr();
-
   var pizza = {
-    sauce: "",
-    orderNow: "",
+    sauce: true,
+    orderNow: true,
+    sauceType: "tomato",
+    protein: "chicken",
     pizzaMkr: function(){
       if (pizza.orderNow == true && pizza.sauce == true){
         return "We are making your pizza with " + this.sauceType + " and " + this.protein + ". Pickup in 20 minutes."
@@ -200,6 +201,8 @@ Hoisting
       }
     }
   }
+
+  pizza.pizzaMkr();
 
   console.log("# 7 pizza.pizzaMrk()", pizza.pizzaMkr());
   console.assert(pizza.pizzaMkr() == "We are making your pizza with tomato and chicken. Pickup in 20 minutes.", "#7 Test failed. Did you add the propeties? Did you set the values correctly? Did you fix the hoisting issues?")
@@ -229,22 +232,22 @@ HINTS:
 (function() {
   "use strict";
 
-  var goodStanding = false;
-  var monthsActive = 2;
+  var goodStanding = true;
+  var monthsActive = 18;
 
   //Do not modify 'name' globaly.
   var name = null;
 
-  accountCheck();
-
-  var benefit = {}
+  var benefit = {};
+  benefit['credit'] = 50;
+  benefit['discount'] = 5;
   //Add properties to 'benefit' using braket notation
 
   var accountCheck = function() {
-
+    name = "James";
     var greeting = function() {
 
-      return "Hello " + name + ". Here is the status of your account."
+      return "Hello " + name + ". Here is the status of your account.";
     }
 
     function accountStat() {
@@ -278,9 +281,10 @@ HINTS:
         return "Thank you for your loyalty. You've been a member for " + monthsActive + " " + "months . You next bill will reflect a $" + benefit.credit + " credit and a " + benefit.discount + "% discount going forward.";
       }
     }
+    return greeting() + " " + accountStat();
     //Here 'accountCheck' should return both the 'greeting' output and the 'accountStat' output.
   }
-
+  accountCheck();
   console.log("#8 accountCheck():", accountCheck());
   console.assert(name == "James", "Test failed. You should set 'name' to 'james' from within accountCheck()");
   console.assert(accountCheck() == "Hello James. Here is the status of your account. Thank you for your loyalty. You've been a member for 18 months . You next bill will reflect a $50 credit and a 5% discount going forward.", "Test failed. It returned: " + accountCheck());
@@ -301,7 +305,7 @@ Compartmentalization
   var multiply = 2 * 8;
 
   function duplicate() {
-    multiply = 2 * 10;
+    var multiply = 2 * 10;
   };
 
   duplicate();
