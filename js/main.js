@@ -17,7 +17,7 @@ Scope
   "use strict";
 
   var x = "I'm a local variable";
-  //console.log(y)
+  // console.log(y)
 
   function scopeThis(){
     var y = "I'm a global variable";
@@ -27,7 +27,12 @@ Scope
 })();
 /*************************************************************************************
 ------------ ANSWER -------------------
+the variables are strings.
+console.log(y), where it is right now would be undefined.
+console.log(x) is "I'm a local variable"
 
+y is undefined because it is not yet defined.
+x is "I'm a local variable" because we defined it as such.
 **************************************************************************************/
 
 
@@ -58,7 +63,10 @@ Hoisting
 })();
 /*************************************************************************************
 ------------ ANSWER -------------------
+console.log(x) = undefined
+console.log(y) = undefined
 
+console.log of x is undefined because we have not yet defined x. console.log of y is undefined because we have not variable named y
 **************************************************************************************/
 
 
@@ -72,11 +80,20 @@ Date Object
 - Declare a variable 'todayIs'.
 - Using the date constructor, it should print today's date.
 **************************************************************************************/
-(function(testerOne){
+var today = '6/12/2017';
+
+(function(test){
   "use strict";
   //YOUR CODE HERE
+  var todayIs = new Date();
+  var month = todayIs.getMonth() + 1;
+  var day = todayIs.getDate();
+  var year = todayIs.getFullYear();
+  var todayIs = month + "/" + day + "/" + year
+  console.log(todayIs);
+
   console.assert(todayIs == today, "#3 Test failed. Did you set the date correctly?");
-})(testerOne);
+})();
 
 
 
@@ -92,11 +109,13 @@ Warm up
 (function() {
   "use strict";
   const add = 2 + 2;
-  //console.log(add);
+  // console.log(add);
 })();
-//console.log(add);
+// console.log(add);
 /**************************************************************************************
 ------------ ANSWER -------------------
+inside: 4
+outside: undefined
 
 **************************************************************************************/
 
@@ -114,14 +133,15 @@ Hoisting
 **************************************************************************************/
 (function(){
   "use strict";
-  var date = new Date(birthday);
-  var birthday;
-  bdayMsg();
+  var date = new Date("April 21, 1983");
+  var birthday = Date.parse(date);
+
   var bdayMsg = function(){
     return "You were born on " + date.toDateString();
   }
   console.log("#5 bdayMsg()", bdayMsg());
   console.assert(bdayMsg() == "You were born on Thu Apr 21 1983", "#5 Test failed. Check function hoisting." )
+bdayMsg();
 })();
 
 
@@ -135,12 +155,16 @@ Date object
 - Declare a variable: 'stringDate'.
 - Set the value of 'stringDate' to be a string of today's date.
 **************************************************************************************/
+
 (function(testerTwo){
   "use strict";
+  // var testerTwo = "";
   var today = new Date();
+  var stringDate = today.toDateString();
+  testerTwo = stringDate
   console.log("#6 stringDate", stringDate)
   console.assert(stringDate == testerTwo, "#6 Test Failed. Did you set stringDate correctly?")
-})(testerTwo);
+})();
 
 
 
@@ -207,12 +231,12 @@ HINTS:
 
   var goodStanding = false;
   var monthsActive = 2;
-  
+
   //Do not modify 'name' globaly.
   var name = null;
-  
+
   accountCheck();
-  
+
   var benefit = {}
   //Add properties to 'benefit' using braket notation
 
@@ -222,15 +246,15 @@ HINTS:
 
       return "Hello " + name + ". Here is the status of your account."
     }
-    
+
     function accountStat() {
-      
+
       if (goodStanding == true && monthsActive >= 12) {
-        
+
         return offerDiscount(name);
 
       } else if (goodStanding == false) {
-        
+
         return "Please make a payment within 7 days or your service will be terminated, forever."
 
       } else if (monthsActive <= 12) {
@@ -239,13 +263,13 @@ HINTS:
         var months;
 
         if (timeFrame == 1) {
-        
+
           months = "month";
         } else {
-        
+
           months = "months"
         }
-        
+
         return "You are " + timeFrame + " " + months + " from getting a special discount!"
       }
 
