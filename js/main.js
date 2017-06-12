@@ -65,7 +65,7 @@ Hoisting
 /*************************************************************************************
 ------------ ANSWER -------------------
 console.log(x) = undefined
-console.log(y) = undefined
+console.log(foo()) = function hoisting
 
 console.log of x is undefined because we have not yet defined x. console.log of y is undefined because we have not variable named y
 **************************************************************************************/
